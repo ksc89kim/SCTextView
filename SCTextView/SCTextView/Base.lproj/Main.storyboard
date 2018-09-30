@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SCTextView" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0JW-vx-cwX">
+                                <rect key="frame" x="0.0" y="20" width="375" height="293"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="293" id="Csz-cJ-BPB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nue-ZX-hfc">
+                                <rect key="frame" x="0.0" y="313" width="31" height="30"/>
+                                <state key="normal" title="Bold"/>
+                                <connections>
+                                    <action selector="clickBold:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3f6-dk-sbK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhn-ns-tKW">
+                                <rect key="frame" x="39" y="313" width="30" height="30"/>
+                                <state key="normal" title="Left"/>
+                                <connections>
+                                    <action selector="clickLeft:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9Yh-ni-ssi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCS-h0-Nw8">
+                                <rect key="frame" x="77" y="313" width="47" height="30"/>
+                                <state key="normal" title="Center"/>
+                                <connections>
+                                    <action selector="clickCenter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iBb-J9-kvf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0R-f8-dEl">
+                                <rect key="frame" x="132" y="313" width="36" height="30"/>
+                                <state key="normal" title="Right"/>
+                                <connections>
+                                    <action selector="clickRight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a0F-An-sPM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Nhn-ns-tKW" firstAttribute="baseline" secondItem="nue-ZX-hfc" secondAttribute="baseline" id="2Kw-mJ-Iuv"/>
+                            <constraint firstItem="0JW-vx-cwX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9Jf-Pm-C5S"/>
+                            <constraint firstItem="Nhn-ns-tKW" firstAttribute="baseline" secondItem="nCS-h0-Nw8" secondAttribute="baseline" id="GTu-bZ-IRn"/>
+                            <constraint firstItem="0JW-vx-cwX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TqK-W5-mAP"/>
+                            <constraint firstItem="nue-ZX-hfc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gkd-5Y-GKe"/>
+                            <constraint firstItem="Nhn-ns-tKW" firstAttribute="leading" secondItem="nue-ZX-hfc" secondAttribute="trailing" constant="8" symbolic="YES" id="mIO-i2-AaB"/>
+                            <constraint firstItem="m0R-f8-dEl" firstAttribute="leading" secondItem="nCS-h0-Nw8" secondAttribute="trailing" constant="8" symbolic="YES" id="nGT-cC-G4D"/>
+                            <constraint firstItem="nue-ZX-hfc" firstAttribute="top" secondItem="0JW-vx-cwX" secondAttribute="bottom" id="rNW-yB-6ng"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0JW-vx-cwX" secondAttribute="trailing" id="sob-Jb-alr"/>
+                            <constraint firstItem="nCS-h0-Nw8" firstAttribute="baseline" secondItem="m0R-f8-dEl" secondAttribute="baseline" id="xut-DD-Ad6"/>
+                            <constraint firstItem="nCS-h0-Nw8" firstAttribute="leading" secondItem="Nhn-ns-tKW" secondAttribute="trailing" constant="8" symbolic="YES" id="zQ6-g9-trP"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="0JW-vx-cwX" id="NCO-p5-fEb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+</document>
