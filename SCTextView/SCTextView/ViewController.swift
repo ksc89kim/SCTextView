@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var textView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.textView.delegate = self
@@ -26,6 +27,11 @@ class ViewController: UIViewController, UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (textView.font?.fontDescriptor.symbolicTraits.contains(.traitBold))! {
+        } else {
+            
+        }
+        
         return true
     }
     
@@ -48,7 +54,7 @@ class ViewController: UIViewController, UITextViewDelegate {
         theAttributedString.enumerateAttribute(NSAttributedString.Key.font, in: NSMakeRange(0, theAttributedString.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (value, range, stop) -> Void in
             if range.intersection(selectedRange) != nil {
                 isFound = true
-                if let oldFont = value as? UIFont  {
+               if let oldFont = value as? UIFont  {
                     isBold = oldFont.fontDescriptor.symbolicTraits.contains(.traitBold)
                 }
             }
@@ -60,12 +66,9 @@ class ViewController: UIViewController, UITextViewDelegate {
             } else {
                 theAttributedString.addAttribute(NSAttributedString.Key.font, value: boldFont, range: selectedRange)
             }
-        } else {
-            theAttributedString.addAttribute(NSAttributedString.Key.font, value: boldFont, range: selectedRange)
         }
         
         theAttributedString.endEditing()
-        
         textView.attributedText = theAttributedString
         textView.selectedTextRange = selectedTextRange
     }
