@@ -14,6 +14,7 @@
 		5958CFE5215FAE3100AD1BA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5958CFE3215FAE3100AD1BA6 /* LaunchScreen.storyboard */; };
 		5958CFF0215FAE3100AD1BA6 /* SCTextViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958CFEF215FAE3100AD1BA6 /* SCTextViewTests.swift */; };
 		5958CFFB215FAE3100AD1BA6 /* SCTextViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958CFFA215FAE3100AD1BA6 /* SCTextViewUITests.swift */; };
+		A4286BCB2185A26F0092FB57 /* TestTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4286BCA2185A26F0092FB57 /* TestTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		5958CFF6215FAE3100AD1BA6 /* SCTextViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SCTextViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5958CFFA215FAE3100AD1BA6 /* SCTextViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextViewUITests.swift; sourceTree = "<group>"; };
 		5958CFFC215FAE3100AD1BA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4286BCA2185A26F0092FB57 /* TestTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				5958CFDA215FAE3000AD1BA6 /* AppDelegate.swift */,
 				5958CFDC215FAE3000AD1BA6 /* ViewController.swift */,
+				A4286BCA2185A26F0092FB57 /* TestTextView.swift */,
 				5958CFDE215FAE3000AD1BA6 /* Main.storyboard */,
 				5958CFE1215FAE3100AD1BA6 /* Assets.xcassets */,
 				5958CFE3215FAE3100AD1BA6 /* LaunchScreen.storyboard */,
@@ -258,6 +261,7 @@
 			files = (
 				5958CFDD215FAE3000AD1BA6 /* ViewController.swift in Sources */,
 				5958CFDB215FAE3000AD1BA6 /* AppDelegate.swift in Sources */,
+				A4286BCB2185A26F0092FB57 /* TestTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
