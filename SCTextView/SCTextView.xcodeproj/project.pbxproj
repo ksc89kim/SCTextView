@@ -14,7 +14,8 @@
 		5958CFE5215FAE3100AD1BA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5958CFE3215FAE3100AD1BA6 /* LaunchScreen.storyboard */; };
 		5958CFF0215FAE3100AD1BA6 /* SCTextViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958CFEF215FAE3100AD1BA6 /* SCTextViewTests.swift */; };
 		5958CFFB215FAE3100AD1BA6 /* SCTextViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958CFFA215FAE3100AD1BA6 /* SCTextViewUITests.swift */; };
-		A4286BCB2185A26F0092FB57 /* TestTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4286BCA2185A26F0092FB57 /* TestTextView.swift */; };
+		A43C36DC21FC52AB00F8A216 /* SCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43C36DB21FC52AB00F8A216 /* SCTextView.swift */; };
+		A43C36DE21FC52C500F8A216 /* SCTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A43C36DD21FC52C500F8A216 /* SCTextView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +49,8 @@
 		5958CFF6215FAE3100AD1BA6 /* SCTextViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SCTextViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5958CFFA215FAE3100AD1BA6 /* SCTextViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextViewUITests.swift; sourceTree = "<group>"; };
 		5958CFFC215FAE3100AD1BA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A4286BCA2185A26F0092FB57 /* TestTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTextView.swift; sourceTree = "<group>"; };
+		A43C36DB21FC52AB00F8A216 /* SCTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextView.swift; sourceTree = "<group>"; };
+		A43C36DD21FC52C500F8A216 /* SCTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCTextView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +101,9 @@
 		5958CFD9215FAE3000AD1BA6 /* SCTextView */ = {
 			isa = PBXGroup;
 			children = (
+				A43C36DA21FC527D00F8A216 /* SCTextView */,
 				5958CFDA215FAE3000AD1BA6 /* AppDelegate.swift */,
 				5958CFDC215FAE3000AD1BA6 /* ViewController.swift */,
-				A4286BCA2185A26F0092FB57 /* TestTextView.swift */,
 				5958CFDE215FAE3000AD1BA6 /* Main.storyboard */,
 				5958CFE1215FAE3100AD1BA6 /* Assets.xcassets */,
 				5958CFE3215FAE3100AD1BA6 /* LaunchScreen.storyboard */,
@@ -126,6 +128,15 @@
 				5958CFFC215FAE3100AD1BA6 /* Info.plist */,
 			);
 			path = SCTextViewUITests;
+			sourceTree = "<group>";
+		};
+		A43C36DA21FC527D00F8A216 /* SCTextView */ = {
+			isa = PBXGroup;
+			children = (
+				A43C36DB21FC52AB00F8A216 /* SCTextView.swift */,
+				A43C36DD21FC52C500F8A216 /* SCTextView.xib */,
+			);
+			path = SCTextView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5958CFE5215FAE3100AD1BA6 /* LaunchScreen.storyboard in Resources */,
+				A43C36DE21FC52C500F8A216 /* SCTextView.xib in Resources */,
 				5958CFE2215FAE3100AD1BA6 /* Assets.xcassets in Resources */,
 				5958CFE0215FAE3000AD1BA6 /* Main.storyboard in Resources */,
 			);
@@ -260,8 +272,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5958CFDD215FAE3000AD1BA6 /* ViewController.swift in Sources */,
+				A43C36DC21FC52AB00F8A216 /* SCTextView.swift in Sources */,
 				5958CFDB215FAE3000AD1BA6 /* AppDelegate.swift in Sources */,
-				A4286BCB2185A26F0092FB57 /* TestTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
