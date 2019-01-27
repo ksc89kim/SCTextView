@@ -63,8 +63,8 @@ class SCTextView: UIView {
     
     var attributedText: NSAttributedString! = NSAttributedString(string: "")
     var isChangeBoldButton:Bool = false
-    weak var boldFont:UIFont?
-    weak var baseFont:UIFont?
+    var boldFont:UIFont?
+    var baseFont:UIFont?
     weak var delegate:SCTextViewDelegate?
     
     weak var boldButton:UIButton? {

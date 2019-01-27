@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "SCTextView"
   s.version      = "1.0.0"
+  s.swift_version = "4.2"
   s.summary      = "Bold and align textView for korea language"
 
   # This description is used to generate tags and improve search results.
@@ -53,6 +54,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
+  s.ios.deployment_target = "10.0"
   s.author             = { "kim sunchul" => "ksc89kim@naver.com" }
   # Or just: s.author    = "kim sunchul"
   # s.authors            = { "kim sunchul" => "ksc89kim@naver.com" }
