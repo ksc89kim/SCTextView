@@ -11,40 +11,10 @@ import UIKit
 extension UIView {
     func setBaseConstraint(view:UIView) {
         self.translatesAutoresizingMaskIntoConstraints = false
-        
-        let viewWidth = NSLayoutConstraint(item: view,
-                                           attribute: .width,
-                                           relatedBy: .equal,
-                                           toItem: self,
-                                           attribute: .width,
-                                           multiplier: 1,
-                                           constant: 0)
-        
-        let viewHeight = NSLayoutConstraint(item: view,
-                                           attribute: .height,
-                                           relatedBy: .equal,
-                                           toItem: self,
-                                           attribute: .height,
-                                           multiplier: 1,
-                                           constant: 0)
-        
-        let centerX = NSLayoutConstraint(item: view,
-                                        attribute: .centerX,
-                                        relatedBy: .equal,
-                                        toItem: self,
-                                        attribute: .centerX,
-                                        multiplier: 1,
-                                        constant: 0)
-        
-        let centerY = NSLayoutConstraint(item: view,
-                                         attribute: .centerY,
-                                         relatedBy: .equal,
-                                         toItem: self,
-                                         attribute: .centerY,
-                                         multiplier: 1,
-                                         constant: 0)
-        
-        self.addConstraints([viewWidth,viewHeight,centerX,centerY])
+        view.widthAnchor.constraint(equalTo:self.widthAnchor, constant: 0 ).isActive = true
+        view.heightAnchor.constraint(equalTo:self.heightAnchor, constant: 0 ).isActive = true
+        view.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        view.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
     }
 }
 
@@ -65,6 +35,7 @@ class SCTextView: UIView {
     var isChangeBoldButton:Bool = false
     var boldFont:UIFont?
     var baseFont:UIFont?
+    
     weak var delegate:SCTextViewDelegate?
     
     weak var boldButton:UIButton? {
@@ -119,8 +90,8 @@ class SCTextView: UIView {
         let bundle = Bundle(for: self.classForCoder)
         let nib = UINib(nibName: String(describing: SCTextView.self), bundle: bundle)
         self.view =  nib.instantiate(withOwner: self, options: nil).first as? UIView
-        self.setBaseConstraint(view: self.view)
         self.addSubview(view);
+        self.setBaseConstraint(view: self.view)
     }
     
     func setEvent() {
@@ -224,6 +195,7 @@ extension SCTextView: UITextViewDelegate{
         }
         
         let theAttributedString = NSMutableAttributedString(attributedString: textView.attributedText)
+        
         if attributedText.length <= theAttributedString.length {
             var isAfterRange = false
             attributedText.enumerateAttribute(NSAttributedString.Key.font, in: NSMakeRange(0, attributedText.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (value, range, stop) -> Void in
@@ -234,11 +206,14 @@ extension SCTextView: UITextViewDelegate{
                     theAttributedString.addAttribute(NSAttributedString.Key.font, value: value as! UIFont, range: range)
                 }
             }
+            
             addAttributeString(isBold: button.isSelected, attributeString: theAttributedString, range: getSelectRange())
             setTextViewAttributeString(attributeString:theAttributedString , selectedTextRange: textView.selectedTextRange)
+            
         } else {
             setTextViewAttributeString(attributeString:theAttributedString , selectedTextRange:nil)
         }
+        
         isChangeBoldButton = true
         
         delegate?.scTextViewDidChange?(textView)
