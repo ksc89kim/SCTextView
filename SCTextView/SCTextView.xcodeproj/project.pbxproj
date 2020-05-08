@@ -16,6 +16,10 @@
 		5958CFFB215FAE3100AD1BA6 /* SCTextViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5958CFFA215FAE3100AD1BA6 /* SCTextViewUITests.swift */; };
 		A43C36DC21FC52AB00F8A216 /* SCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43C36DB21FC52AB00F8A216 /* SCTextView.swift */; };
 		A43C36DE21FC52C500F8A216 /* SCTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A43C36DD21FC52C500F8A216 /* SCTextView.xib */; };
+		A49CAB742465708900290C3D /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CAB732465708900290C3D /* UIViewExtensions.swift */; };
+		A49CAB762465711200290C3D /* SCAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CAB752465711200290C3D /* SCAlignment.swift */; };
+		A49CAB78246578FF00290C3D /* SCBold.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49CAB77246578FF00290C3D /* SCBold.swift */; };
+		A4A2AF6C2465804D00BF7EE7 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A2AF6B2465804D00BF7EE7 /* UIButtonExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 		5958CFFC215FAE3100AD1BA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A43C36DB21FC52AB00F8A216 /* SCTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCTextView.swift; sourceTree = "<group>"; };
 		A43C36DD21FC52C500F8A216 /* SCTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCTextView.xib; sourceTree = "<group>"; };
+		A49CAB732465708900290C3D /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		A49CAB752465711200290C3D /* SCAlignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCAlignment.swift; sourceTree = "<group>"; };
+		A49CAB77246578FF00290C3D /* SCBold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCBold.swift; sourceTree = "<group>"; };
+		A4A2AF6B2465804D00BF7EE7 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +141,12 @@
 		A43C36DA21FC527D00F8A216 /* SCTextView */ = {
 			isa = PBXGroup;
 			children = (
+				A49CAB732465708900290C3D /* UIViewExtensions.swift */,
+				A4A2AF6B2465804D00BF7EE7 /* UIButtonExtensions.swift */,
 				A43C36DB21FC52AB00F8A216 /* SCTextView.swift */,
 				A43C36DD21FC52C500F8A216 /* SCTextView.xib */,
+				A49CAB752465711200290C3D /* SCAlignment.swift */,
+				A49CAB77246578FF00290C3D /* SCBold.swift */,
 			);
 			path = SCTextView;
 			sourceTree = "<group>";
@@ -273,7 +285,11 @@
 			files = (
 				5958CFDD215FAE3000AD1BA6 /* ViewController.swift in Sources */,
 				A43C36DC21FC52AB00F8A216 /* SCTextView.swift in Sources */,
+				A49CAB78246578FF00290C3D /* SCBold.swift in Sources */,
+				A49CAB742465708900290C3D /* UIViewExtensions.swift in Sources */,
 				5958CFDB215FAE3000AD1BA6 /* AppDelegate.swift in Sources */,
+				A49CAB762465711200290C3D /* SCAlignment.swift in Sources */,
+				A4A2AF6C2465804D00BF7EE7 /* UIButtonExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
