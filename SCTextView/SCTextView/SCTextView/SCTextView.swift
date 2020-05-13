@@ -17,7 +17,7 @@ import UIKit
     @objc optional func scTextView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool
 }
 
-class SCTextView: UIView, SCAlignment, SCBold{    
+final class SCTextView: UIView, SCAlignment, SCBold{    
     @IBOutlet var view: UIView!
     @IBOutlet weak var textView: UITextView!
     weak var delegate:SCTextViewDelegate?
