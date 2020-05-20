@@ -88,6 +88,7 @@ final class SCTextView: UIView, SCAlignment, SCBold{
     
     @objc func onBold(sender:UIButton) {
         sender.toggle()
+        
         let editAttributedString = NSMutableAttributedString(attributedString: textView.attributedText)
         addAttributeStringForBoldStatus(attributeString: editAttributedString, range: textView.selectedRange)
         setTextViewAttributeString(attributeString:editAttributedString , selectedTextRange: textView.selectedTextRange)

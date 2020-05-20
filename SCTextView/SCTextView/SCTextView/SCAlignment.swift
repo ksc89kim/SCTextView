@@ -13,28 +13,14 @@ protocol SCAlignment {
     var rightButton:UIButton? { get set }
     var centerButton:UIButton? { get set }
     
-    func updateAlignUI(type:NSTextAlignment)
     func updateAlignLeft()
     func updateAlignRight()
     func updateAlignCenter()
+    func updateAlignUI(type:NSTextAlignment)
+    
 }
 
 extension SCAlignment {
-    func updateAlignUI(type:NSTextAlignment) {
-        switch (type) {
-        case .left:
-            updateAlignLeft()
-            break
-        case .center:
-            updateAlignCenter()
-            break
-        case .right:
-            updateAlignRight()
-            break
-        default:
-            break
-        }
-    }
     
     func updateAlignLeft() {
         leftButton?.isSelected = true
@@ -52,5 +38,21 @@ extension SCAlignment {
         leftButton?.isSelected = false
         rightButton?.isSelected = false
         centerButton?.isSelected = true
+    }
+    
+    func updateAlignUI(type:NSTextAlignment) {
+        switch (type) {
+        case .left:
+            updateAlignLeft()
+            break
+        case .center:
+            updateAlignCenter()
+            break
+        case .right:
+            updateAlignRight()
+            break
+        default:
+            break
+        }
     }
 }
