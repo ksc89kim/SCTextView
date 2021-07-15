@@ -8,151 +8,168 @@
 
 import UIKit
 
-@objc protocol SCTextViewDelegate:class {
-    @objc optional func scTextViewShouldBeginEditing(_ textView: UITextView) -> Bool
-    @objc optional func scTextViewShouldEndEditing(_ textView: UITextView) -> Bool
-    @objc optional func scTextViewDidChange(_ textView: UITextView)
-    @objc optional func scTextViewDidChangeSelection(_ textView: UITextView)
-    @objc optional func scTextView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
-    @objc optional func scTextView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool
+@objc protocol SCTextViewDelegate: AnyObject {
+  @objc optional func scTextViewShouldBeginEditing(_ textView: UITextView) -> Bool
+  @objc optional func scTextViewShouldEndEditing(_ textView: UITextView) -> Bool
+  @objc optional func scTextViewDidChange(_ textView: UITextView)
+  @objc optional func scTextViewDidChangeSelection(_ textView: UITextView)
+  @objc optional func scTextView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+  @objc optional func scTextView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool
 }
 
-final class SCTextView: UIView, SCAlignment, SCBold{    
-    @IBOutlet var view: UIView!
-    @IBOutlet weak var textView: UITextView!
-    weak var delegate:SCTextViewDelegate?
+final class SCTextView: UIView, SCAlignment, SCBold {
 
-    // SCBold
-    var boldFont:UIFont?
-    var baseFont:UIFont?
-    var tempAttributedString: NSAttributedString = NSAttributedString(string: "")
-    var isChangeBoldUI:Bool = false
-    weak var boldButton:UIButton? {
-        didSet{
-            boldButton?.addTarget(self, action: #selector(onBold(sender:)), for: .touchUpInside)
-        }
+  // MARK: - UI Components
+
+  @IBOutlet var view: UIView!
+  @IBOutlet weak var textView: UITextView!
+
+  // MARK: - Properties
+
+  weak var delegate:SCTextViewDelegate?
+
+  // MARK: - SCBold
+
+  var boldFont: UIFont?
+  var baseFont: UIFont?
+  var tempAttributedString: NSAttributedString = NSAttributedString(string: "")
+  var isChangeBoldUI: Bool = false
+  weak var boldButton: UIButton? {
+    didSet{
+      self.boldButton?.addTarget(self, action: #selector(self.onBold(sender:)), for: .touchUpInside)
     }
-    
-    // SCAlignment
-    weak var leftButton:UIButton? {
-        didSet {
-            leftButton?.addTarget(self, action: #selector(onLeft(sender:)), for: .touchUpInside)
-        }
+  }
+
+  // MARK: - SCAlignment
+
+  weak var leftButton: UIButton? {
+    didSet {
+      self.leftButton?.addTarget(self, action: #selector(self.onLeft(sender:)), for: .touchUpInside)
     }
-    weak var rightButton:UIButton? {
-        didSet {
-            rightButton?.addTarget(self, action: #selector(onRight(sender:)), for: .touchUpInside)
-        }
+  }
+
+  weak var rightButton: UIButton? {
+    didSet {
+      self.rightButton?.addTarget(self, action: #selector(self.onRight(sender:)), for: .touchUpInside)
     }
-    weak var centerButton:UIButton? {
-        didSet {
-            centerButton?.addTarget(self, action: #selector(onCenter(sender:)), for: .touchUpInside)
-        }
+  }
+
+  weak var centerButton: UIButton? {
+    didSet {
+      self.centerButton?.addTarget(self, action: #selector(self.onCenter(sender:)), for: .touchUpInside)
     }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setup()
+  }
+
+  // MARK: - Initializers
+
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    self.setup()
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    self.setup()
+  }
+
+  override func prepareForInterfaceBuilder() {
+    super.prepareForInterfaceBuilder()
+    self.setup()
+  }
+
+  // MARK: - Set
+
+  func setup() {
+    self.setUI()
+    self.setEvent()
+  }
+
+  func setUI() {
+    let bundle = Bundle(for: self.classForCoder)
+    let nib = UINib(nibName: String(describing: SCTextView.self), bundle: bundle)
+    self.view =  nib.instantiate(withOwner: self, options: nil).first as? UIView
+    self.addSubview(self.view);
+    self.setBaseConstraint(view: self.view)
+  }
+
+  func setEvent() {
+    self.textView.delegate = self
+  }
+
+  // MARK: - Event
+
+  @objc func onBold(sender: UIButton) {
+    sender.toggle()
+
+    let editAttributedString = NSMutableAttributedString(attributedString: self.textView.attributedText)
+    self.addAttributeStringForBoldStatus(attributeString: editAttributedString, range: self.textView.selectedRange)
+    self.setTextViewAttributeString(attributeString:editAttributedString , selectedTextRange: self.textView.selectedTextRange)
+  }
+
+  @objc func onLeft(sender: UIButton) {
+    self.textView.textAlignment = .left
+    self.updateAlignUI(type:textView.textAlignment)
+  }
+
+  @objc func onRight(sender: UIButton) {
+    self.textView.textAlignment = .right
+    self.updateAlignUI(type:textView.textAlignment)
+  }
+
+  @objc func onCenter(sender: UIButton) {
+    self.textView.textAlignment = .center
+    self.updateAlignUI(type:textView.textAlignment)
+  }
+
+  func setTextViewAttributeString(attributeString: NSMutableAttributedString, selectedTextRange: UITextRange?) {
+    self.textView.attributedText = attributeString
+    self.tempAttributedString = self.textView.attributedText
+    if selectedTextRange != nil {
+      self.textView.selectedTextRange = selectedTextRange
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.setup()
-    }
-    
-    override func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
-        self.setup()
-    }
-    
-    func setup() {
-        self.setUI()
-        self.setEvent()
-    }
-    
-    func setUI() {
-        let bundle = Bundle(for: self.classForCoder)
-        let nib = UINib(nibName: String(describing: SCTextView.self), bundle: bundle)
-        self.view =  nib.instantiate(withOwner: self, options: nil).first as? UIView
-        self.addSubview(view);
-        self.setBaseConstraint(view: self.view)
-    }
-    
-    func setEvent() {
-        textView.delegate = self
-    }
-    
-    @objc func onBold(sender:UIButton) {
-        sender.toggle()
-        
-        let editAttributedString = NSMutableAttributedString(attributedString: textView.attributedText)
-        addAttributeStringForBoldStatus(attributeString: editAttributedString, range: textView.selectedRange)
-        setTextViewAttributeString(attributeString:editAttributedString , selectedTextRange: textView.selectedTextRange)
-    }
-    
-    @objc func onLeft(sender:UIButton) {
-        textView.textAlignment = .left
-        updateAlignUI(type:textView.textAlignment)
-    }
-    
-    @objc func onRight(sender:UIButton) {
-        textView.textAlignment = .right
-        updateAlignUI(type:textView.textAlignment)
-    }
-    
-    @objc func onCenter(sender:UIButton) {
-        textView.textAlignment = .center
-        updateAlignUI(type:textView.textAlignment)
-    }
-    
-    func setTextViewAttributeString(attributeString:NSMutableAttributedString, selectedTextRange:UITextRange?){
-        textView.attributedText = attributeString
-        tempAttributedString = textView.attributedText
-        if selectedTextRange != nil {
-            textView.selectedTextRange = selectedTextRange
-        }
-    }
+  }
 }
+
 
 extension SCTextView: UITextViewDelegate{
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        return delegate?.scTextViewShouldBeginEditing?(textView) ?? true
-    }
-    
-    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-        return delegate?.scTextViewShouldEndEditing?(textView) ?? true
-    }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        guard boldButton != nil else {
-            return
-        }
-    
-        if let editAttributedString = getEditAttributedString(textView: textView) {
-            setTextViewAttributeString(attributeString:editAttributedString , selectedTextRange:textView.selectedTextRange)
-        } else {
-            setTextViewAttributeString(attributeString:NSMutableAttributedString(attributedString: textView.attributedText) , selectedTextRange:nil)
-        }
+  func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+    return self.delegate?.scTextViewShouldBeginEditing?(textView) ?? true
+  }
 
-        isChangeBoldUI = true
-        delegate?.scTextViewDidChange?(textView)
+  func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+    return self.delegate?.scTextViewShouldEndEditing?(textView) ?? true
+  }
+
+  func textViewDidChange(_ textView: UITextView) {
+    guard self.boldButton != nil else {
+      return
     }
     
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        updateBoldUI(textView: textView)
-        delegate?.scTextViewDidChangeSelection?(textView)
+    if let editAttributedString = getEditAttributedString(textView: textView) {
+      self.setTextViewAttributeString(attributeString:editAttributedString , selectedTextRange:textView.selectedTextRange)
+    } else {
+      self.setTextViewAttributeString(attributeString:NSMutableAttributedString(attributedString: textView.attributedText) , selectedTextRange:nil)
     }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        isChangeBoldUI = false
-        return delegate?.scTextView?(textView, shouldChangeTextIn: range, replacementText: text) ?? true
-    }
-    
-    func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        return delegate?.scTextView?(textView,shouldInteractWith:textAttachment,in:characterRange,interaction:interaction) ?? true
-    }
+
+    self.isChangeBoldUI = true
+    self.delegate?.scTextViewDidChange?(textView)
+  }
+
+  func textViewDidChangeSelection(_ textView: UITextView) {
+    self.updateBoldUI(textView: textView)
+    delegate?.scTextViewDidChangeSelection?(textView)
+  }
+
+  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    self.isChangeBoldUI = false
+    return delegate?.scTextView?(textView, shouldChangeTextIn: range, replacementText: text) ?? true
+  }
+
+  func textView(_ textView: UITextView, shouldInteractWith textAttachment: NSTextAttachment, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+    return self.delegate?.scTextView?(textView,shouldInteractWith:textAttachment,in:characterRange,interaction:interaction) ?? true
+  }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIButton {
-    func toggle() {
-        self.isSelected = self.isSelected ? false : true
-    }
+  func toggle() {
+    self.isSelected = self.isSelected ? false : true
+  }
 }

@@ -9,68 +9,69 @@
 import UIKit
 
 protocol SCBold {
-    var tempAttributedString:NSAttributedString { get set }
-    var isChangeBoldUI:Bool { get set}
-    var boldFont:UIFont? { get set }
-    var baseFont:UIFont? { get set }
-    var boldButton:UIButton?  { get set }
-    
-    func addAttributeStringForBoldStatus(attributeString:NSMutableAttributedString, range:NSRange)
+  var tempAttributedString:NSAttributedString { get set }
+  var isChangeBoldUI:Bool { get set}
+  var boldFont:UIFont? { get set }
+  var baseFont:UIFont? { get set }
+  var boldButton:UIButton?  { get set }
+
+  func addAttributeStringForBoldStatus(attributeString: NSMutableAttributedString, range: NSRange)
 }
 
+
 extension SCBold {
-    func addAttributeStringForBoldStatus(attributeString:NSMutableAttributedString, range:NSRange) {
-        guard let sender = boldButton ,let bold = boldFont, let base = baseFont else {
-            return
-        }
-        
-        if sender.isSelected{
-            attributeString.addAttribute(NSAttributedString.Key.font, value: bold, range: range)
-        } else {
-            attributeString.addAttribute(NSAttributedString.Key.font, value: base, range: range)
-        }
+  func addAttributeStringForBoldStatus(attributeString: NSMutableAttributedString, range: NSRange) {
+    guard let sender = self.boldButton ,let bold = self.boldFont, let base = self.baseFont else {
+      return
     }
-    
-    func getSelectedRange(textView:UITextView) -> NSRange {
-        var selectedRange = textView.selectedRange
-        if selectedRange.length < 1 { // EMPTY RANGE
-            selectedRange = NSRange(location: selectedRange.location - 1, length:1)
-        }
-        return selectedRange
+
+    if sender.isSelected{
+      attributeString.addAttribute(NSAttributedString.Key.font, value: bold, range: range)
+    } else {
+      attributeString.addAttribute(NSAttributedString.Key.font, value: base, range: range)
     }
-    
-    func getEditAttributedString(textView:UITextView) -> NSMutableAttributedString?  {
-        guard tempAttributedString.length <= textView.attributedText.length else {
-            return nil
-        }
-        
-        let editAttributedString = NSMutableAttributedString(attributedString: textView.attributedText)
-        var isAfterSelectedRange = false
-        tempAttributedString.enumerateAttribute(NSAttributedString.Key.font, in: NSMakeRange(0, tempAttributedString.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (value, range, stop) -> Void in
-            if !isAfterSelectedRange {
-                if range.intersection(getSelectedRange(textView: textView)) != nil{
-                    isAfterSelectedRange = true
-                }
-                editAttributedString.addAttribute(NSAttributedString.Key.font, value: value as! UIFont, range: range)
-            }
-        }
-        
-        addAttributeStringForBoldStatus(attributeString: editAttributedString, range: getSelectedRange(textView: textView))
-        
-        return editAttributedString
+  }
+
+  func getSelectedRange(textView: UITextView) -> NSRange {
+    var selectedRange = textView.selectedRange
+    if selectedRange.length < 1 { // EMPTY RANGE
+      selectedRange = NSRange(location: selectedRange.location - 1, length:1)
     }
-    
-    func updateBoldUI(textView:UITextView) {
-        guard isChangeBoldUI, boldButton != nil else {
-            return
-        }
-        
-        tempAttributedString.enumerateAttribute(NSAttributedString.Key.font, in: NSMakeRange(0, tempAttributedString.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (value, range, stop) -> Void in
-            let font = value as! UIFont
-            if range.intersection(getSelectedRange(textView: textView)) != nil {
-                boldButton?.isSelected = font.fontDescriptor.symbolicTraits.contains(.traitBold)
-            }
-        }
+    return selectedRange
+  }
+
+  func getEditAttributedString(textView: UITextView) -> NSMutableAttributedString?  {
+    guard self.tempAttributedString.length <= textView.attributedText.length else {
+      return nil
     }
-    
+
+    let editAttributedString = NSMutableAttributedString(attributedString: textView.attributedText)
+    var isAfterSelectedRange = false
+    self.tempAttributedString.enumerateAttribute(NSAttributedString.Key.font, in: NSMakeRange(0, self.tempAttributedString.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (value, range, stop) -> Void in
+      if !isAfterSelectedRange {
+        if range.intersection(self.getSelectedRange(textView: textView)) != nil{
+          isAfterSelectedRange = true
+        }
+        editAttributedString.addAttribute(NSAttributedString.Key.font, value: value as! UIFont, range: range)
+      }
+    }
+
+    self.addAttributeStringForBoldStatus(attributeString: editAttributedString, range: self.getSelectedRange(textView: textView))
+
+    return editAttributedString
+  }
+
+  func updateBoldUI(textView: UITextView) {
+    guard self.isChangeBoldUI, self.boldButton != nil else {
+      return
+    }
+
+    self.tempAttributedString.enumerateAttribute(NSAttributedString.Key.font, in: NSMakeRange(0, self.tempAttributedString.length), options: NSAttributedString.EnumerationOptions(rawValue: 0)) { (value, range, stop) -> Void in
+      let font = value as! UIFont
+      if range.intersection(self.getSelectedRange(textView: textView)) != nil {
+        self.boldButton?.isSelected = font.fontDescriptor.symbolicTraits.contains(.traitBold)
+      }
+    }
+  }
+
 }
